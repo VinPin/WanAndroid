@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -19,16 +19,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'androidx.core:core-ktx:1.1.0'
-    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
-    api 'com.vinpin:commonutils:2.0.0'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["annotation"]
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["constraintlayout"]
+    api rootProject.ext.dependencies["multidex"] // dex分包
+    api rootProject.ext.dependencies["extensions"] //lifecycle
+    api rootProject.ext.dependencies["core-ktx"]
+    api rootProject.ext.dependencies["viewmodel-ktx"]
+    api rootProject.ext.dependencies["coroutines-android"]
+    api rootProject.ext.dependencies["gson"] // gson
+    api rootProject.ext.dependencies["eventbus"] // EventBus事件总线
+    api rootProject.ext.dependencies["commonutils"] // 工具类
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
