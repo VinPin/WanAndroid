@@ -28,6 +28,7 @@ dependencies {
     api 'androidx.appcompat:appcompat:1.1.0'
     api 'androidx.core:core-ktx:1.1.0'
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    api 'com.vinpin:commonutils:2.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

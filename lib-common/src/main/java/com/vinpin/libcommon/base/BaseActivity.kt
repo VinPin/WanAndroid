@@ -17,10 +17,29 @@ import kotlinx.coroutines.cancel
 @ExperimentalCoroutinesApi
 abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
+    /** 标识需要[window]默认的背景色，默认不需要。避免不必要的背景色造成过度绘制 */
+    var mNeedWindowBackgroud: Boolean = false
+
+    var isActive: Boolean = false
+        private set
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         getData(savedInstanceState)
+        if (!mNeedWindowBackgroud) {
+            window.setBackgroundDrawable(null)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isActive = true
+    }
+
+    override fun onStop() {
+        isActive = false
+        super.onStop()
     }
 
     override fun onDestroy() {
