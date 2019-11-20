@@ -27,6 +27,8 @@ ext {
             "arouter-api"       : 'com.alibaba:arouter-api:1.4.1',
             "arouter-compiler"  : 'com.alibaba:arouter-compiler:1.2.2',
 
+            "logging-interceptor"   : 'com.squareup.okhttp3:logging-interceptor:3.14.0',
+
             "retrofit"          : "com.squareup.retrofit2:retrofit:${version.retrofitSdkVersion}",
             "converter-scalars" : "com.squareup.retrofit2:converter-scalars:${version.retrofitSdkVersion}",
             "converter-gson"    : "com.squareup.retrofit2:converter-gson:${version.retrofitSdkVersion}",

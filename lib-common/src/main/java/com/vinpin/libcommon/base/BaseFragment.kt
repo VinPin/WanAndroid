@@ -46,7 +46,7 @@ abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mContentView = View.inflate(mContext, getLayoutId(), null)
+        mContentView = View.inflate(mContext, layoutId, null)
         return mContentView
     }
 
@@ -66,7 +66,7 @@ abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
     }
 
     /** 返回布局的资源id */
-    abstract fun getLayoutId(): Int
+    abstract val layoutId: Int
 
     /** 初始化数据 */
     abstract fun getData()

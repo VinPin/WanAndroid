@@ -51,6 +51,12 @@ dependencies {
     api rootProject.ext.dependencies["gson"] // gson
     api rootProject.ext.dependencies["eventbus"] // EventBus事件总线
     api rootProject.ext.dependencies["commonutils"] // 工具类
+    // OkHttp
+    api rootProject.ext.dependencies["logging-interceptor"]
+    // retrofit
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["converter-scalars"]
+    api rootProject.ext.dependencies["converter-gson"]
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

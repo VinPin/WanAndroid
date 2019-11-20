@@ -14,7 +14,6 @@ import kotlinx.coroutines.cancel
  *     desc  : Activity基类
  * </pre>
  */
-@ExperimentalCoroutinesApi
 abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     /** 标识需要[window]默认的背景色，默认不需要。避免不必要的背景色造成过度绘制 */
@@ -25,7 +24,7 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        setContentView(layoutId)
         getData(savedInstanceState)
         if (!mNeedWindowBackgroud) {
             window.setBackgroundDrawable(null)
@@ -48,7 +47,7 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
     }
 
     /** 返回布局Id */
-    abstract fun getLayoutId(): Int
+    abstract val layoutId: Int
 
     /** 初始化数据 */
     abstract fun getData(savedInstanceState: Bundle?)

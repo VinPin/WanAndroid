@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.vinpin.commonutils.AppManager
-import com.vinpin.libcommon.utils.Utils
+import com.vinpin.commonutils.Utils
 
 /**
  * <pre>
