@@ -1,10 +1,11 @@
-package com.eisoo.libcommon.retrofit
+package com.vinpin.libcommon.net
 
 import android.content.Context
 import com.vinpin.commonutils.Utils
 import com.vinpin.libcommon.BuildConfig
-import com.vinpin.libcommon.net.KcOkHttpClient
-import com.vinpin.libcommon.net.KcRetrofit
+import okhttp3.Cookie
+import okhttp3.CookieJar
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 
 /**
@@ -37,11 +38,16 @@ object KcRetrofitUtils {
     }
 
     /**
-     * 使用默认的KcRetrofit实例创建API接口
+     * 使用默认的KcRetrofit实例创建指定的API接口
      */
     fun <T> create(cls: Class<T>): T {
         return getDefault().create(cls)
     }
+
+    /**
+     * 使用默认的KcRetrofit实例创建ApiService接口
+     */
+    fun getApi() = create(ApiService::class.java)
 
     /**
      * 创建默认的OkHttpClient实例
@@ -58,5 +64,16 @@ object KcRetrofitUtils {
             .readTimeout(30)
             .writeTimeout(30)
             .connectTimeout(30)
+            .cookieJar(object : CookieJar {
+                override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
+                    if (url.toString().startsWith("https://www.wanandroid.com/user/login?")) {
+                        CookieStore.saveCookies(cookies)
+                    }
+                }
+
+                override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
+                    return CookieStore.getCookies()
+                }
+            })
     }
 }

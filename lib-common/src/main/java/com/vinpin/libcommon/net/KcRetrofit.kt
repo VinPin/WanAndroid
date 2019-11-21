@@ -1,7 +1,7 @@
 package com.vinpin.libcommon.net
 
-import com.eisoo.libcommon.retrofit.KcRetrofitUtils
 import com.vinpin.libcommon.util.LogUtils
+import okhttp3.CookieJar
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -81,6 +81,11 @@ class KcOkHttpClient {
 
     fun addInterceptor(interceptor: Interceptor): KcOkHttpClient {
         mOkHttpBuilder.addInterceptor(interceptor)
+        return this
+    }
+
+    fun cookieJar(cookieJar: CookieJar): KcOkHttpClient {
+        mOkHttpBuilder.cookieJar(cookieJar)
         return this
     }
 
