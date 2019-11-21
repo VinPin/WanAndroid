@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -7,17 +11,33 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.vinpin.wanandroid"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        if (isModule.toBoolean()) {
+            multiDexEnabled true
+        }
         // ARouter
         kapt {
             arguments {
                 arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                // release模式下排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'debug/**'
+                }
             }
         }
     }
@@ -29,27 +49,10 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-
-    lintOptions {
-        abortOnError false
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation project(':lib-common')
-    if (isModule.toBoolean()) {
-        ation project(':module-main')
-    }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ARouter
     kapt rootProject.ext.dependencies["arouter-compiler"]
