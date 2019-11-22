@@ -51,6 +51,7 @@ dependencies {
     api rootProject.ext.dependencies["coroutines-android"]
     api rootProject.ext.dependencies["gson"] // gson
     api rootProject.ext.dependencies["eventbus"] // EventBus事件总线
+    api rootProject.ext.dependencies["arouter-api"] // ARouter
     api rootProject.ext.dependencies["commonutils"] // 工具类
     // OkHttp
     api rootProject.ext.dependencies["logging-interceptor"]
