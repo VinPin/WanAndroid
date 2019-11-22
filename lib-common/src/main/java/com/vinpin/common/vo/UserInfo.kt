@@ -1,4 +1,4 @@
-package com.vinpin.libcommon.vo
+package com.vinpin.common.vo
 
 /**
  * <pre>

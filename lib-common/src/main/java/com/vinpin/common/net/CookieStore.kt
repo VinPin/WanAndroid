@@ -1,4 +1,4 @@
-package com.vinpin.libcommon.net
+package com.vinpin.common.net
 
 import android.content.Context
 import android.content.SharedPreferences

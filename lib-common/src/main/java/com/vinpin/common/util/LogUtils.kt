@@ -1,8 +1,8 @@
-package com.vinpin.libcommon.util
+package com.vinpin.common.util
 
 import android.util.Log
 
-import com.vinpin.libcommon.BuildConfig
+import com.vinpin.common.BuildConfig
 
 /**
  * <pre>

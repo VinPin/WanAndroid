@@ -1,4 +1,4 @@
-package com.vinpin.libcommon.base
+package com.vinpin.common.base
 
 import android.app.Activity
 import android.app.Application

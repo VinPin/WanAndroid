@@ -1,6 +1,6 @@
-package com.vinpin.libcommon.net
+package com.vinpin.common.net
 
-import com.vinpin.libcommon.util.LogUtils
+import com.vinpin.common.util.LogUtils
 import okhttp3.CookieJar
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

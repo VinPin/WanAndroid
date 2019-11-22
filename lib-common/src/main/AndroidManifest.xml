@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vinpin.libcommon" />
+    package="com.vinpin.common">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

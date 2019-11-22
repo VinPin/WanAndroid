@@ -1,6 +1,6 @@
-package com.vinpin.libcommon.net
+package com.vinpin.common.net
 
-import com.vinpin.libcommon.vo.UserInfo
+import com.vinpin.common.vo.UserInfo
 import retrofit2.http.POST
 import retrofit2.http.Query
 

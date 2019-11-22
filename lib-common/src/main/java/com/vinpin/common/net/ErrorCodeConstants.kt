@@ -1,4 +1,4 @@
-package com.vinpin.libcommon.net
+package com.vinpin.common.net
 
 /**
  * <pre>

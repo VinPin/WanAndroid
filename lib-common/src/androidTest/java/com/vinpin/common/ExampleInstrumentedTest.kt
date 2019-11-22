@@ -1,4 +1,4 @@
-package com.vinpin.libcommon
+package com.vinpin.common
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

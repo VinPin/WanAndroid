@@ -1,8 +1,8 @@
-package com.vinpin.libcommon.net
+package com.vinpin.common.net
 
 import android.content.Context
 import com.vinpin.commonutils.Utils
-import com.vinpin.libcommon.BuildConfig
+import com.vinpin.common.BuildConfig
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl

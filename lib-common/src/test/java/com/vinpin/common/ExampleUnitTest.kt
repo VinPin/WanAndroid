@@ -1,4 +1,4 @@
-package com.vinpin.libcommon
+package com.vinpin.common
 
 import org.junit.Test
 
