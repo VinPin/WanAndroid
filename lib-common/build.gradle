@@ -44,6 +44,7 @@ dependencies {
     api rootProject.ext.dependencies["annotation"]
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["constraintlayout"]
+    api rootProject.ext.dependencies["viewpager2"]
     api rootProject.ext.dependencies["multidex"] // dex分包
     api rootProject.ext.dependencies["extensions"] //lifecycle
     api rootProject.ext.dependencies["core-ktx"]
@@ -53,6 +54,7 @@ dependencies {
     api rootProject.ext.dependencies["eventbus"] // EventBus事件总线
     api rootProject.ext.dependencies["arouter-api"] // ARouter
     api rootProject.ext.dependencies["commonutils"] // 工具类
+    api rootProject.ext.dependencies["realtimeblurview"]
     // OkHttp
     api rootProject.ext.dependencies["logging-interceptor"]
     // retrofit

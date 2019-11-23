@@ -1,0 +1,102 @@
+package com.vinpin.wanandroid.main.widget
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.Gravity
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import com.vinpin.commonutils.ResourcesUtils
+import com.vinpin.commonutils.SizeUtils
+import com.vinpin.wanandroid.main.R
+
+/**
+ * <pre>
+ *     author: vinpin
+ *     time  : 2019/11/23 14:01
+ *     desc  : 底部导航栏
+ * </pre>
+ */
+class BottomBar @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleRes: Int = 0
+) : LinearLayout(context, attrs, defStyleRes) {
+
+    private var mTexts = listOf("主页", "体系", "公众号", "项目", "我的")
+    private var mIconResIds = listOf(0, 0, 0, 0, 0)
+    private var mListener: ((view: View, position: Int) -> Unit)? = null
+
+    init {
+        this.orientation = HORIZONTAL
+        setItemsInternal()
+        setCurrentItem(0)
+    }
+
+    private fun setItemsInternal() {
+        this.weightSum = mTexts.size.toFloat()
+        for (i in mTexts.indices) {
+            val item = createItem()
+            item.mText.text = mTexts[i]
+            item.mText.textSize = SizeUtils.dp2px(10f).toFloat()
+            item.mIcon.setImageResource(mIconResIds[i])
+            item.setOnClickListener {
+                mListener?.invoke(it, i)
+            }
+            this.addView(item)
+        }
+    }
+
+    private fun createItem(): BottomItem {
+        val item = BottomItem(context)
+        item.layoutParams = LayoutParams(0, LayoutParams.MATCH_PARENT, 1f)
+        return item
+    }
+
+    fun setItems(texts: List<String>, iconResIds: List<Int>) {
+        mTexts = texts
+        mIconResIds = iconResIds
+        setItemsInternal()
+    }
+
+    fun setOnItemClickListener(block: (view: View, position: Int) -> Unit) {
+        mListener = block
+    }
+
+    fun setCurrentItem(position: Int) {
+        for (i in 0 until childCount) {
+            val view = getChildAt(i) as? BottomItem
+            val selected = i == position
+            view?.mIcon?.setColorFilter(
+                ResourcesUtils.getColor(
+                    if (selected) R.color.bottomBarItemSelected else R.color.bottomBarItem
+                )
+            )
+            view?.mText?.setTextColor(
+                ResourcesUtils.getColor(
+                    if (selected) R.color.bottomBarItemSelected else R.color.bottomBarItem
+                )
+            )
+        }
+    }
+
+    class BottomItem @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleRes: Int = 0
+    ) : LinearLayout(context, attrs, defStyleRes) {
+
+        val mIcon = AppCompatImageView(context)
+        val mText = TextView(context)
+
+        init {
+            this.orientation = VERTICAL
+            this.gravity = Gravity.CENTER_HORIZONTAL
+            mIcon.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            mText.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            this.addView(mIcon)
+            this.addView(mText)
+        }
+    }
+}
