@@ -24,8 +24,8 @@ class BottomBar @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyleRes) {
 
-    private var mTexts = listOf("主页", "体系", "公众号", "项目", "我的")
-    private var mIconResIds = listOf(0, 0, 0, 0, 0)
+    private val mTexts = ArrayList<String>(5)
+    private val mIconResIds = ArrayList<Int>(5)
     private var mListener: ((view: View, position: Int) -> Unit)? = null
 
     init {
@@ -36,12 +36,14 @@ class BottomBar @JvmOverloads constructor(
 
     private fun setItemsInternal() {
         this.weightSum = mTexts.size.toFloat()
+        this.removeAllViews()
         for (i in mTexts.indices) {
             val item = createItem()
             item.mText.text = mTexts[i]
             item.mText.textSize = SizeUtils.dp2px(10f).toFloat()
             item.mIcon.setImageResource(mIconResIds[i])
             item.setOnClickListener {
+                setCurrentItem(i)
                 mListener?.invoke(it, i)
             }
             this.addView(item)
@@ -55,8 +57,10 @@ class BottomBar @JvmOverloads constructor(
     }
 
     fun setItems(texts: List<String>, iconResIds: List<Int>) {
-        mTexts = texts
-        mIconResIds = iconResIds
+        mTexts.clear()
+        mTexts.addAll(texts)
+        mIconResIds.clear()
+        mIconResIds.addAll(iconResIds)
         setItemsInternal()
     }
 

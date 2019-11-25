@@ -10,4 +10,14 @@ package com.vinpin.common
 object RouterConstants {
 
     const val MAIN_MAINACTIVITY = "main/MainActivity"
+
+    const val MAIN_HOMEFRAGMENT = "main/HomeFragment"
+
+    const val MAIN_KNOWLEDGEFRAGMENT = "main/KnowledgeFragment"
+
+    const val MIAN_WECHATFRAGMENT = "main/WechatFragment"
+
+    const val MAIN_PROJECTFRAGMENT = "main/ProjectFragment"
+
+    const val MAIN_MINEFRAGMENT = "main/MineFragment"
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 
@@ -18,7 +17,6 @@ import kotlinx.coroutines.cancel
  *     desc  : Fragment基类
  * </pre>
  */
-@ExperimentalCoroutinesApi
 abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
 
     lateinit var mContext: Context
