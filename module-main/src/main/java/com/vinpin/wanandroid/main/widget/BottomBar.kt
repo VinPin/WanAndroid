@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.vinpin.commonutils.ResourcesUtils
-import com.vinpin.commonutils.SizeUtils
 import com.vinpin.wanandroid.main.R
 
 /**
@@ -40,7 +39,7 @@ class BottomBar @JvmOverloads constructor(
         for (i in mTexts.indices) {
             val item = createItem()
             item.mText.text = mTexts[i]
-            item.mText.textSize = SizeUtils.dp2px(10f).toFloat()
+            item.mText.textSize = 10f
             item.mIcon.setImageResource(mIconResIds[i])
             item.setOnClickListener {
                 setCurrentItem(i)
@@ -96,7 +95,7 @@ class BottomBar @JvmOverloads constructor(
 
         init {
             this.orientation = VERTICAL
-            this.gravity = Gravity.CENTER_HORIZONTAL
+            this.gravity = Gravity.CENTER
             mIcon.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             mText.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             this.addView(mIcon)

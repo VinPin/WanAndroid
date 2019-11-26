@@ -47,8 +47,8 @@ android {
 
 dependencies {
     implementation project(':lib-common')
-    if (isModule.toBoolean()) {
-        ation project(':module-main')
+    if (!isModule.toBoolean()) {
+        implementation project(':module-main')
     }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ARouter

@@ -24,7 +24,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:realtimeBlurRadius="20dp"
-        app:realtimeOverlayColor="#8000" />
+        app:realtimeOverlayColor="#11000000" />
 
     <com.vinpin.wanandroid.main.widget.BottomBar
         android:id="@+id/bottomBar"

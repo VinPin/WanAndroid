@@ -3,6 +3,8 @@ package com.vinpin.common.base
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
+import com.vinpin.common.BuildConfig
 import com.vinpin.commonutils.AppManager
 import com.vinpin.commonutils.Utils
 
@@ -23,6 +25,11 @@ abstract class BaseApplication : Application() {
         }
         Utils.init(this)
         registerActivityCallbacks()
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
         initSdk()
     }
 
