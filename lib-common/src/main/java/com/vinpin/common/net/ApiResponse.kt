@@ -12,6 +12,12 @@ import androidx.annotation.Keep
 @Keep
 data class ApiResponse<T>(var data: T?, var errorCode: Int, var errorMsg: String) {
 
+    constructor(apiException: ApiException) : this(
+        null,
+        apiException.errorCode,
+        apiException.errorMsg
+    )
+
     fun getOrNull(): T? = when (errorCode) {
         0 -> data
         else -> null

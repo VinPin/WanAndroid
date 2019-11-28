@@ -1,7 +1,10 @@
 package com.vinpin.common.net
 
+import com.vinpin.common.vo.ArticleList
 import com.vinpin.common.vo.UserInfo
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -25,5 +28,11 @@ interface ApiService {
         @Query("username") username: String,
         @Query("password") password: String
     ): ApiResponse<UserInfo>
+
+    /**
+     * 首页文章列表
+     */
+    @GET("article/list/{page}/json")
+    suspend fun getArticleList(@Path("page") page: Int): ApiResponse<ArticleList>
 
 }

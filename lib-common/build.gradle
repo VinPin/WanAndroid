@@ -55,6 +55,7 @@ dependencies {
     api rootProject.ext.dependencies["arouter-api"] // ARouter
     api rootProject.ext.dependencies["commonutils"] // 工具类
     api rootProject.ext.dependencies["realtimeblurview"]
+    api rootProject.ext.dependencies["SmartRefreshLayout"]
     // OkHttp
     api rootProject.ext.dependencies["logging-interceptor"]
     // retrofit

@@ -4,6 +4,9 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.vinpin.common.BuildConfig
 import com.vinpin.commonutils.AppManager
 import com.vinpin.commonutils.Utils
@@ -16,6 +19,21 @@ import com.vinpin.commonutils.Utils
  * </pre>
  */
 abstract class BaseApplication : Application() {
+
+    init {
+        //设置全局默认配置（优先级最低，会被其他设置覆盖）
+        SmartRefreshLayout.setDefaultRefreshInitializer { context, layout ->
+
+        }
+        //全局设置默认的 Header
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+            ClassicsHeader(context)
+        }
+        //全局设置默认的 Footer
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+            ClassicsFooter(context)
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
