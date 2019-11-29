@@ -19,7 +19,13 @@ class HomeRepository {
 
     suspend fun getTopArticleList(): ApiResponse<List<Article>> = withContext(Dispatchers.IO) {
         try {
-            KcRetrofitUtils.getApi().getTopArticleList()
+            val apiResponse = KcRetrofitUtils.getApi().getTopArticleList()
+            apiResponse.getOrNull()?.let { list ->
+                list.forEach {
+                    it.top = true
+                }
+            }
+            apiResponse
         } catch (e: Exception) {
             ApiResponse<List<Article>>(handlingExceptions(e))
         }

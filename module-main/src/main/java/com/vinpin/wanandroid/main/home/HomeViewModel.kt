@@ -40,11 +40,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             val topApiResponse = deferred.await()
             val apiResponse = deferred1.await()
             mInfos.clear()
-            topApiResponse.getOrNull()?.let { list ->
-                list.forEach {
-                    it.top = true
-                    mInfos.add(it)
-                }
+            topApiResponse.getOrNull()?.let {
+                mInfos.addAll(it)
             }
             apiResponse.getOrNull()?.let {
                 mInfos.addAll(it.datas)

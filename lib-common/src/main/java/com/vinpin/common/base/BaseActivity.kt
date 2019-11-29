@@ -2,6 +2,9 @@ package com.vinpin.common.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.vinpin.common.R
+import com.vinpin.common.util.StatusBarHelper
+import com.vinpin.commonutils.ResourcesUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -28,6 +31,7 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
         if (!mNeedWindowBackgroud) {
             window.setBackgroundDrawable(null)
         }
+        setStatusBar()
     }
 
     override fun onResume() {
@@ -50,4 +54,9 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
 
     /** 初始化数据 */
     abstract fun getData(savedInstanceState: Bundle?)
+
+    fun setStatusBar() {
+        StatusBarHelper.setColor(this, ResourcesUtils.getColor(R.color.colorPrimaryDark))
+        StatusBarHelper.setLightMode(this)
+    }
 }
