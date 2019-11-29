@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.vinpin.common.net.Resource
 import com.vinpin.common.vo.Article
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
@@ -27,12 +28,39 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val articleList: LiveData<Resource<List<Article>>> = _articleList
 
-    fun getArticleList(loadMore: Boolean = false) {
+    fun getArticleList() {
         viewModelScope.launch {
-            page = if (loadMore) page++ else 0
+            page = 0
+            val deferred = async {
+                mHomeRepository.getTopArticleList()
+            }
+            val deferred1 = async {
+                mHomeRepository.getArticleList(page)
+            }
+            val topApiResponse = deferred.await()
+            val apiResponse = deferred1.await()
+            mInfos.clear()
+            topApiResponse.getOrNull()?.let { list ->
+                list.forEach {
+                    it.top = true
+                    mInfos.add(it)
+                }
+            }
+            apiResponse.getOrNull()?.let {
+                mInfos.addAll(it.datas)
+                _articleList.value = Resource.success(mInfos)
+            }
+            apiResponse.exceptionOrNull()?.let {
+                _articleList.value = Resource.failure(it)
+            }
+        }
+    }
+
+    fun getArticleListMore() {
+        viewModelScope.launch {
+            page += 1
             val apiResponse = mHomeRepository.getArticleList(page)
             apiResponse.getOrNull()?.let {
-                if (!loadMore) mInfos.clear()
                 mInfos.addAll(it.datas)
                 _articleList.value = Resource.success(mInfos)
             }

@@ -37,6 +37,7 @@ class RefreshRecyclerView @JvmOverloads constructor(
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = itemAnimator
+        recyclerView.overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         this.setRefreshContent(recyclerView)
     }
 

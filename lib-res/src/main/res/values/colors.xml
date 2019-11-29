@@ -4,9 +4,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="activity">#FFFFFF</color>
+    <color name="activity">#F5F5F5</color>
     <color name="titleBar">#FFFFFF</color>
     <color name="bottomBar">#FFFFFF</color>
     <color name="bottomBarItem">#999999</color>
     <color name="bottomBarItemSelected">#4282f4</color>
+
+    <color name="articleItem">#FFFFFF</color>
+    <color name="articleItemPressed">#F9F9F9</color>
+
 </resources>

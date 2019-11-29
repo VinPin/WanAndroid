@@ -10,6 +10,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.vinpin.common.BuildConfig
 import com.vinpin.commonutils.AppManager
 import com.vinpin.commonutils.Utils
+import com.vinpin.selectorhelper.SelectorHelper
 
 /**
  * <pre>
@@ -42,6 +43,7 @@ abstract class BaseApplication : Application() {
             AppManager.getInstance().AppExit()
         }
         Utils.init(this)
+        SelectorHelper.init(this)
         registerActivityCallbacks()
         if (BuildConfig.DEBUG) {
             ARouter.openLog()

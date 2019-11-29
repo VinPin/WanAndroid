@@ -1,5 +1,7 @@
 package com.vinpin.common.vo
 
+import android.text.TextUtils
+
 /**
  * <pre>
  *     author: VinPin
@@ -86,6 +88,32 @@ data class Article(
      * visible : 1
      * zan : 0
      */
+
+    var top: Boolean = false
+
+    fun getDisplayAuthor(): String {
+        if (!TextUtils.isEmpty(author)) {
+            return author
+        }
+        if (!TextUtils.isEmpty(shareUser)) {
+            return shareUser
+        }
+        return "匿名"
+    }
+
+    fun formatChapterName(): String {
+        val names = arrayOf(superChapterName, chapterName)
+        val format = StringBuilder()
+        for (name in names) {
+            if (!TextUtils.isEmpty(name)) {
+                if (format.isNotEmpty()) {
+                    format.append("·")
+                }
+                format.append(name)
+            }
+        }
+        return format.toString()
+    }
 }
 
 data class Tag(

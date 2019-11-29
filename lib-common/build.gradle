@@ -54,6 +54,8 @@ dependencies {
     api rootProject.ext.dependencies["eventbus"] // EventBus事件总线
     api rootProject.ext.dependencies["arouter-api"] // ARouter
     api rootProject.ext.dependencies["commonutils"] // 工具类
+    api rootProject.ext.dependencies["baseadapter"]
+    api rootProject.ext.dependencies["selectorhelper"]
     api rootProject.ext.dependencies["realtimeblurview"]
     api rootProject.ext.dependencies["SmartRefreshLayout"]
     // OkHttp

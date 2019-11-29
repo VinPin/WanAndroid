@@ -1,5 +1,6 @@
 package com.vinpin.common.net
 
+import com.vinpin.common.vo.Article
 import com.vinpin.common.vo.ArticleList
 import com.vinpin.common.vo.UserInfo
 import retrofit2.http.GET
@@ -30,7 +31,14 @@ interface ApiService {
     ): ApiResponse<UserInfo>
 
     /**
+     * 置顶文章
+     */
+    @GET("article/top/json")
+    suspend fun getTopArticleList(): ApiResponse<List<Article>>
+
+    /**
      * 首页文章列表
+     * 参数：页码，拼接在连接中，从0开始。
      */
     @GET("article/list/{page}/json")
     suspend fun getArticleList(@Path("page") page: Int): ApiResponse<ArticleList>
