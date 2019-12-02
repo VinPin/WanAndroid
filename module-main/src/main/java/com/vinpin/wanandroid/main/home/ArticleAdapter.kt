@@ -11,6 +11,7 @@ import com.vinpin.adapter.base.ViewHolder
 import com.vinpin.common.vo.Article
 import com.vinpin.commonutils.ResourcesUtils
 import com.vinpin.commonutils.SizeUtils
+import com.vinpin.imageloader.ImageLoader
 import com.vinpin.selectorhelper.SelectorHelper
 import com.vinpin.selectorhelper.ShapeHelper
 import com.vinpin.wanandroid.main.R
@@ -23,7 +24,7 @@ import com.vinpin.wanandroid.main.R
  * </pre>
  */
 class ArticleAdapter(
-    context: Context,
+    val context: Context,
     datas: List<Article>
 ) : CommonAdapter<Article>(context, R.layout.item_article_list, datas) {
 
@@ -100,6 +101,17 @@ class ArticleAdapter(
             R.id.txt_chapter_name,
             Html.fromHtml(info.formatChapterName()).toString()
         )
+
+        val imgCover = holder.getView<ImageView>(R.id.img_cover)
+        if (info.envelopePic?.isNotEmpty() == true) {
+            ImageLoader.with(context).url(info.envelopePic)
+                .placeholder(R.drawable.image_holder)
+                .error(R.drawable.image_holder)
+                .into(imgCover)
+            imgCover.visibility = View.VISIBLE
+        } else {
+            imgCover.visibility = View.GONE
+        }
     }
 
     fun setOnCollectClickListener(block: (View: View, item: Article, position: Int) -> Unit) {

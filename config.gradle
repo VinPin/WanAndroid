@@ -26,6 +26,8 @@ ext {
             "commonutils"        : 'com.vinpin:commonutils:2.0.0',
             "baseadapter"        : 'com.vinpin:baseadapter:2.0.0',
             "selectorhelper"     : 'com.vinpin:selectorhelper:2.0.0',
+            "imageloader"        : 'com.vinpin:imageloader:2.0.0',
+            "roundedimageview"   : 'com.makeramen:roundedimageview:2.3.0',
             "realtimeblurview"   : 'com.github.mmin18:realtimeblurview:1.2.1',
             "SmartRefreshLayout" : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0',
 
