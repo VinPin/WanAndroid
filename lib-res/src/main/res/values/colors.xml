@@ -4,13 +4,19 @@
     <color name="colorPrimaryDark">#F2F2F2</color>
     <color name="colorAccent">#D81B60</color>
 
+    <!--背景色-->
     <color name="activity">#F5F5F5</color>
-    <color name="titleBar">#FFFFFF</color>
+    <color name="titleBarLine">#11000000</color>
     <color name="bottomBar">#FFFFFF</color>
     <color name="bottomBarItem">#999999</color>
     <color name="bottomBarItemSelected">#4282f4</color>
 
     <color name="articleItem">#FFFFFF</color>
     <color name="articleItemPressed">#F9F9F9</color>
+
+    <!--字体颜色值-->
+    <color name="titleBarText">#333333</color>
+    <color name="text_main">#333333</color>
+    <color name="text_sub">#666666</color>
 
 </resources>

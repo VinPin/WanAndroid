@@ -35,6 +35,8 @@ class HomeFragment : BaseFragment() {
     override val layoutId: Int get() = R.layout.fragment_home
 
     override fun getData() {
+        title_bar.backIcon.visibility = View.GONE
+        title_bar.title.text = "首页"
         mViewModel.articleList.observe(this, Observer { resource ->
             resource.getOrNull()?.let {
                 recycerView.closeHeaderOrFooter()

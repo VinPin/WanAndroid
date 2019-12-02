@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:maxLines="1"
-            android:textColor="#666666"
+            android:textColor="@color/text_sub"
             android:textSize="13sp"
             tools:text="作者" />
 
@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:gravity="end"
             android:maxLines="1"
-            android:textColor="#666666"
+            android:textColor="@color/text_sub"
             android:textSize="13sp"
             tools:text="21小时前" />
 
@@ -64,7 +64,7 @@
                 android:lineSpacingExtra="0dp"
                 android:maxLines="3"
                 android:singleLine="false"
-                android:textColor="#333333"
+                android:textColor="@color/text_main"
                 android:textSize="15sp"
                 tools:singleLine="true"
                 tools:text="标题" />
@@ -106,7 +106,7 @@
             android:layout_toEndOf="@id/txt_top"
             android:gravity="end"
             android:maxLines="1"
-            android:textColor="#666666"
+            android:textColor="@color/text_sub"
             android:textSize="12sp"
             tools:text="动画效果·Lottie" />
 
