@@ -88,27 +88,59 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/txt_top"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_middle"
-            android:layout_marginEnd="5dp"
-            android:text="置顶"
-            android:textColor="#f86734"
-            android:textSize="12sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_chapter_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rl_middle"
-            android:layout_toEndOf="@id/txt_top"
-            android:gravity="end"
-            android:maxLines="1"
-            android:textColor="@color/text_sub"
-            android:textSize="12sp"
-            tools:text="动画效果·Lottie" />
+            <TextView
+                android:id="@+id/txt_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:text="置顶"
+                android:textColor="@color/text_orange"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_fresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:text="新"
+                android:textColor="@color/text_orange"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:gravity="center"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:textColor="@color/text_green"
+                android:textSize="12sp"
+                tools:text="标签" />
+
+            <TextView
+                android:id="@+id/txt_chapter_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:maxLines="1"
+                android:textColor="@color/text_sub"
+                android:textSize="12sp"
+                tools:text="动画效果·Lottie" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

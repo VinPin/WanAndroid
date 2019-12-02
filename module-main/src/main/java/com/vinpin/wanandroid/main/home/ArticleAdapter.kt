@@ -43,6 +43,7 @@ class ArticleAdapter(
         holder.setText(R.id.txt_author, info.getDisplayAuthor())
         holder.setText(R.id.txt_time, info.niceDate)
         holder.setText(R.id.txt_title, Html.fromHtml(info.title).toString())
+
         if (!TextUtils.isEmpty(info.desc)) {
             holder.getView<TextView>(R.id.txt_title).setSingleLine(true)
             holder.setText(R.id.txt_desc, Html.fromHtml(info.desc).toString())
@@ -52,7 +53,34 @@ class ArticleAdapter(
             holder.setText(R.id.txt_desc, null)
             holder.setVisible(R.id.txt_desc, false)
         }
+
+        if (info.top) {
+            holder.getView<TextView>(R.id.txt_top).background = ShapeHelper.getInstance()
+                .stroke(SizeUtils.dp2px(1f), R.color.text_orange)
+                .cornerRadius(SizeUtils.dp2px(1.5f).toFloat())
+                .create()
+        }
         holder.setVisible(R.id.txt_top, info.top)
+
+        if (info.fresh) {
+            holder.getView<TextView>(R.id.txt_fresh).background = ShapeHelper.getInstance()
+                .stroke(SizeUtils.dp2px(1f), R.color.text_orange)
+                .cornerRadius(SizeUtils.dp2px(1.5f).toFloat())
+                .create()
+        }
+        holder.setVisible(R.id.txt_fresh, info.fresh)
+
+        if (info.tags?.isNotEmpty() == true) {
+            holder.getView<TextView>(R.id.txt_tag).background = ShapeHelper.getInstance()
+                .stroke(SizeUtils.dp2px(1f), R.color.text_green)
+                .cornerRadius(SizeUtils.dp2px(1.5f).toFloat())
+                .create()
+            holder.setText(R.id.txt_tag, info.tags!![0].name)
+            holder.setVisible(R.id.txt_tag, true)
+        } else {
+            holder.setVisible(R.id.txt_tag, false)
+        }
+
         holder.setText(
             R.id.txt_chapter_name,
             Html.fromHtml(info.formatChapterName()).toString()

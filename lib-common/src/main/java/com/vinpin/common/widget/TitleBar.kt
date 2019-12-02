@@ -67,7 +67,7 @@ class TitleBar @JvmOverloads constructor(
         setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
         line.setBackgroundColor(ContextCompat.getColor(context, R.color.titleBarLine))
 
-        title.setTextColor(ContextCompat.getColor(context, R.color.titleBarText))
+        title.setTextColor(ContextCompat.getColor(context, R.color.text_main))
         title.textSize = 18f
         title.typeface = Typeface.DEFAULT_BOLD
         title.maxLines = 1

@@ -15,8 +15,10 @@
     <color name="articleItemPressed">#F9F9F9</color>
 
     <!--字体颜色值-->
-    <color name="titleBarText">#333333</color>
     <color name="text_main">#333333</color>
     <color name="text_sub">#666666</color>
+    <color name="text_orange">#E24234</color>
+    <color name="text_green">#009A61</color>
+    <color name="text_blue">#4282f4</color>
 
 </resources>
