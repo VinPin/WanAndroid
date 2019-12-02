@@ -1,5 +1,6 @@
 package com.vinpin.common.net
 
+import com.vinpin.common.LoginReceiver
 import com.vinpin.commonutils.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -137,7 +138,8 @@ suspend fun <T> tryCatchWithIo(block: suspend CoroutineScope.() -> ApiResponse<T
         try {
             val apiResponse = block.invoke(this)
             if (apiResponse.notLogin()) {
-                //请先登录
+                // 请先登录
+                LoginReceiver.sendNotLogin()
             }
             apiResponse
         } catch (e: Throwable) {

@@ -2,6 +2,8 @@ package com.vinpin.common.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.vinpin.common.LoginInit
+import com.vinpin.common.LoginReceiver
 import com.vinpin.common.R
 import com.vinpin.common.util.StatusBarHelper
 import com.vinpin.commonutils.ResourcesUtils
@@ -24,6 +26,8 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
     var isActive: Boolean = false
         private set
 
+    private var loginReceiver: LoginReceiver? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
@@ -37,6 +41,14 @@ abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope()
     override fun onResume() {
         super.onResume()
         isActive = true
+        loginReceiver = LoginReceiver.register {
+            LoginInit.goLoginCallBack?.invoke(this)
+        }
+    }
+
+    override fun onPause() {
+        loginReceiver?.unregister()
+        super.onPause()
     }
 
     override fun onStop() {

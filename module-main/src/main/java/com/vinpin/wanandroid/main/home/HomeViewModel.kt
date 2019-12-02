@@ -95,7 +95,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun uncollect(item: Article, position: Int) {
         viewModelScope.launch {
-            val apiResponse = mHomeRepository.collect(item.id)
+            val apiResponse = mHomeRepository.uncollect(item.id)
             apiResponse.exceptionOrNull()?.let {
                 item.collect = true
                 _notifyItem.value = NotifyItem.change(position)
