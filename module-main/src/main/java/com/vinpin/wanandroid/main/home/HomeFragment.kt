@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.vinpin.adapter.MultiItemTypeAdapter
+import com.vinpin.common.NotifyItem
 import com.vinpin.common.RouterConstants
 import com.vinpin.common.base.BaseFragment
 import com.vinpin.common.vo.Article
@@ -44,6 +45,15 @@ class HomeFragment : BaseFragment() {
             }
             resource.exceptionOrNull()?.let {
                 recycerView.closeHeaderOrFooter()
+            }
+        })
+        mViewModel.notifyItem.observe(this, Observer {
+            when (it.type) {
+                NotifyItem.Type.CHANGE -> {
+                    mAdapter?.notifyItemChanged(it.position)
+                }
+                else -> {
+                }
             }
         })
         recycerView.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
@@ -87,6 +97,9 @@ class HomeFragment : BaseFragment() {
                     return false
                 }
             })
+            mAdapter?.setOnCollectClickListener { _, item, position ->
+                mViewModel.collectClicked(item, position)
+            }
             recycerView.setAdapter(mAdapter!!)
         } else {
             mAdapter?.notifyDataSetChanged()

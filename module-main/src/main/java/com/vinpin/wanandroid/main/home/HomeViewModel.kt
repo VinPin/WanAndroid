@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.vinpin.common.NotifyItem
 import com.vinpin.common.net.Resource
 import com.vinpin.common.vo.Article
 import kotlinx.coroutines.async
@@ -27,6 +28,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _articleList = MutableLiveData<Resource<List<Article>>>()
 
     val articleList: LiveData<Resource<List<Article>>> = _articleList
+
+    private val _notifyItem = MutableLiveData<NotifyItem>()
+
+    val notifyItem: LiveData<NotifyItem> = _notifyItem
 
     fun getArticleList() {
         viewModelScope.launch {
@@ -63,6 +68,37 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             }
             apiResponse.exceptionOrNull()?.let {
                 _articleList.value = Resource.failure(it)
+            }
+        }
+    }
+
+    fun collectClicked(item: Article, position: Int) {
+        val collect = item.collect
+        item.collect = !collect
+        _notifyItem.value = NotifyItem.change(position)
+        if (collect) {
+            uncollect(item, position)
+        } else {
+            collect(item, position)
+        }
+    }
+
+    private fun collect(item: Article, position: Int) {
+        viewModelScope.launch {
+            val apiResponse = mHomeRepository.collect(item.id)
+            apiResponse.exceptionOrNull()?.let {
+                item.collect = false
+                _notifyItem.value = NotifyItem.change(position)
+            }
+        }
+    }
+
+    private fun uncollect(item: Article, position: Int) {
+        viewModelScope.launch {
+            val apiResponse = mHomeRepository.collect(item.id)
+            apiResponse.exceptionOrNull()?.let {
+                item.collect = true
+                _notifyItem.value = NotifyItem.change(position)
             }
         }
     }

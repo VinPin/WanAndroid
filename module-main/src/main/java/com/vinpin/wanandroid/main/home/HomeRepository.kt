@@ -2,11 +2,9 @@ package com.vinpin.wanandroid.main.home
 
 import com.vinpin.common.net.ApiResponse
 import com.vinpin.common.net.KcRetrofitUtils
-import com.vinpin.common.net.handlingExceptions
+import com.vinpin.common.net.tryCatchWithIo
 import com.vinpin.common.vo.Article
 import com.vinpin.common.vo.ArticleList
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * <pre>
@@ -17,25 +15,25 @@ import kotlinx.coroutines.withContext
  */
 class HomeRepository {
 
-    suspend fun getTopArticleList(): ApiResponse<List<Article>> = withContext(Dispatchers.IO) {
-        try {
-            val apiResponse = KcRetrofitUtils.getApi().getTopArticleList()
-            apiResponse.getOrNull()?.let { list ->
-                list.forEach {
-                    it.top = true
-                }
+    suspend fun getTopArticleList(): ApiResponse<List<Article>> = tryCatchWithIo {
+        val apiResponse = KcRetrofitUtils.getApi().getTopArticleList()
+        apiResponse.getOrNull()?.let { list ->
+            list.forEach {
+                it.top = true
             }
-            apiResponse
-        } catch (e: Exception) {
-            ApiResponse<List<Article>>(handlingExceptions(e))
         }
+        apiResponse
     }
 
-    suspend fun getArticleList(page: Int): ApiResponse<ArticleList> = withContext(Dispatchers.IO) {
-        try {
-            KcRetrofitUtils.getApi().getArticleList(page)
-        } catch (e: Exception) {
-            ApiResponse<ArticleList>(handlingExceptions(e))
-        }
+    suspend fun getArticleList(page: Int): ApiResponse<ArticleList> = tryCatchWithIo {
+        KcRetrofitUtils.getApi().getArticleList(page)
+    }
+
+    suspend fun collect(id: Int): ApiResponse<String> = tryCatchWithIo {
+        KcRetrofitUtils.getApi().collect(id)
+    }
+
+    suspend fun uncollect(id: Int): ApiResponse<String> = tryCatchWithIo {
+        KcRetrofitUtils.getApi().uncollect(id)
     }
 }

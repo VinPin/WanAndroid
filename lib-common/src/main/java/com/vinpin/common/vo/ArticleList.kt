@@ -36,7 +36,7 @@ data class Article(
     val author: String?,
     val chapterId: Int,
     val chapterName: String?,
-    val collect: Boolean,
+    var collect: Boolean,
     val courseId: Int,
     val desc: String?,
     val envelopePic: String?,
@@ -107,7 +107,7 @@ data class Article(
         for (name in names) {
             if (!TextUtils.isEmpty(name)) {
                 if (format.isNotEmpty()) {
-                    format.append(" / ")
+                    format.append("/")
                 }
                 format.append(name)
             }

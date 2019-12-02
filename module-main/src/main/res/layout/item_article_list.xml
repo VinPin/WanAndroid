@@ -42,8 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_author"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/img_cover"
@@ -88,10 +87,26 @@
 
         </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/img_collect"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/rl_middle"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:adjustViewBounds="true"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_collect"
+            tools:ignore="ContentDescription" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_middle"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/img_collect"
             android:orientation="horizontal">
 
             <TextView

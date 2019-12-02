@@ -80,7 +80,7 @@ class TitleBar @JvmOverloads constructor(
         backIcon.setPadding(dp2px(15f), 0, dp2px(5f), 0)
         backIcon.scaleType = ImageView.ScaleType.FIT_CENTER
         backIcon.adjustViewBounds = true
-        backIcon.setColorFilter(R.color.bottomBarItem)
+        backIcon.setColorFilter(ContextCompat.getColor(context, R.color.bottomBarItem))
         backIcon.setOnClickListener {
             backListener?.invoke(it)
         }

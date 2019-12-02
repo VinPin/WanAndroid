@@ -4,10 +4,12 @@ import android.content.Context
 import android.text.Html
 import android.text.TextUtils
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.vinpin.adapter.CommonAdapter
 import com.vinpin.adapter.base.ViewHolder
 import com.vinpin.common.vo.Article
+import com.vinpin.commonutils.ResourcesUtils
 import com.vinpin.commonutils.SizeUtils
 import com.vinpin.selectorhelper.SelectorHelper
 import com.vinpin.selectorhelper.ShapeHelper
@@ -24,6 +26,8 @@ class ArticleAdapter(
     context: Context,
     datas: List<Article>
 ) : CommonAdapter<Article>(context, R.layout.item_article_list, datas) {
+
+    private var mCollectListener: ((View: View, item: Article, position: Int) -> Unit)? = null
 
     override fun convert(holder: ViewHolder, info: Article, position: Int) {
         holder.getView<View>(R.id.rl_content).background =
@@ -81,9 +85,24 @@ class ArticleAdapter(
             holder.setVisible(R.id.txt_tag, false)
         }
 
+        if (info.collect) {
+            holder.getView<ImageView>(R.id.img_collect)
+                .setColorFilter(ResourcesUtils.getColor(R.color.bottomBarItemSelected))
+        } else {
+            holder.getView<ImageView>(R.id.img_collect)
+                .setColorFilter(ResourcesUtils.getColor(R.color.bottomBarItem))
+        }
+        holder.setOnClickListener(R.id.img_collect) {
+            mCollectListener?.invoke(it, info, position)
+        }
+
         holder.setText(
             R.id.txt_chapter_name,
             Html.fromHtml(info.formatChapterName()).toString()
         )
+    }
+
+    fun setOnCollectClickListener(block: (View: View, item: Article, position: Int) -> Unit) {
+        mCollectListener = block
     }
 }

@@ -1,6 +1,9 @@
 package com.vinpin.common.net
 
 import com.vinpin.commonutils.NetworkUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -37,7 +40,8 @@ class Resource<out T> constructor(val status: Status, val result: Result<T>?) {
 
         fun <T : Any> success(data: T) = Resource(Status.SUCCESS, Result.success(data))
 
-        fun <T : Any> failure(exception: ApiException) = Resource<T>(Status.FAILURE, Result.failure(exception))
+        fun <T : Any> failure(exception: ApiException) =
+            Resource<T>(Status.FAILURE, Result.failure(exception))
     }
 }
 
@@ -116,6 +120,7 @@ class ApiException(val errorCode: Int, val errorMsg: String) : Exception(errorMs
     var error: Throwable? = null
 
     companion object {
+
         /** 创建无法连接服务器的异常 */
         fun noService() = ApiException(ErrorCodeConstants.NOSERVICE, "无法连接服务器")
 
@@ -123,6 +128,22 @@ class ApiException(val errorCode: Int, val errorMsg: String) : Exception(errorMs
         fun noNetwork() = ApiException(ErrorCodeConstants.NONETWORK, "网络已断开")
     }
 }
+
+/**
+ * 对指定得网络请求代码块进行try Catch，并统一处理未登录的情况。
+ */
+suspend fun <T> tryCatchWithIo(block: suspend CoroutineScope.() -> ApiResponse<T>) =
+    withContext(Dispatchers.IO) {
+        try {
+            val apiResponse = block.invoke(this)
+            if (apiResponse.notLogin()) {
+                //请先登录
+            }
+            apiResponse
+        } catch (e: Throwable) {
+            ApiResponse<T>(handlingExceptions(e))
+        }
+    }
 
 /**
  * 处理请求层的错误，对可能的已知的错误进行处理。

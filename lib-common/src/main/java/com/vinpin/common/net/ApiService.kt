@@ -43,4 +43,19 @@ interface ApiService {
     @GET("article/list/{page}/json")
     suspend fun getArticleList(@Path("page") page: Int): ApiResponse<ArticleList>
 
+    /**
+     * 收藏站内文章
+     * 方法：POST
+     * 参数：文章id，拼接在链接中。
+     */
+    @POST("lg/collect/{id}/json")
+    suspend fun collect(@Path("id") id: Int): ApiResponse<String>
+
+    /**
+     * 取消收藏 文章列表
+     * 方法：POST
+     * 参数：id:拼接在链接上 id传入的是列表中文章的id。
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    suspend fun uncollect(@Path("id") id: Int): ApiResponse<String>
 }

@@ -1,4 +1,4 @@
-package com.vinpin.wanandroid.main.widget
+package com.vinpin.common.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,8 +7,8 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import com.vinpin.common.R
 import com.vinpin.commonutils.ResourcesUtils
-import com.vinpin.wanandroid.main.R
 
 /**
  * <pre>

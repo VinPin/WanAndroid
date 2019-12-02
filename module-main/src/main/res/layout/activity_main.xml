@@ -26,7 +26,7 @@
         app:realtimeBlurRadius="20dp"
         app:realtimeOverlayColor="#11000000" />
 
-    <com.vinpin.wanandroid.main.widget.BottomBar
+    <com.vinpin.common.widget.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="49dp"

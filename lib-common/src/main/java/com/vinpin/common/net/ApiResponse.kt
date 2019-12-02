@@ -27,4 +27,6 @@ data class ApiResponse<T>(var data: T?, var errorCode: Int, var errorMsg: String
         0 -> null
         else -> ApiException(errorCode, errorMsg)
     }
+
+    fun notLogin(): Boolean = errorCode == -1001
 }
