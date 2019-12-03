@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#F2F2F2</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#01000000</color>
+
     <!--背景色-->
     <color name="activity">#F5F5F5</color>
     <color name="titleBarLine">#11000000</color>
@@ -14,11 +17,16 @@
     <color name="articleItem">#FFFFFF</color>
     <color name="articleItemPressed">#F9F9F9</color>
 
+    <color name="login_top">#009A61</color>
+    <color name="login_button">#009A61</color>
+    <color name="login_button_disable">#60009A61</color>
+
     <!--字体颜色值-->
     <color name="text_main">#333333</color>
     <color name="text_sub">#666666</color>
     <color name="text_orange">#E24234</color>
     <color name="text_green">#009A61</color>
     <color name="text_blue">#4282f4</color>
+    <color name="text_white">#FFFFFF</color>
 
 </resources>
