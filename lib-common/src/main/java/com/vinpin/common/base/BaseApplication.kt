@@ -9,7 +9,8 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.vinpin.common.BuildConfig
 import com.vinpin.common.LoginInit
-import com.vinpin.common.util.LogUtils
+import com.vinpin.common.LoginOwner
+import com.vinpin.common.RouterConstants
 import com.vinpin.commonutils.AppManager
 import com.vinpin.commonutils.Utils
 import com.vinpin.selectorhelper.SelectorHelper
@@ -53,8 +54,9 @@ abstract class BaseApplication : Application() {
         }
         ARouter.init(this)
         LoginInit.goLoginCallBack = {
-            //todo 跳转登录界面
-            LogUtils.d("test", "跳转登录界面")
+            val loginOwner =
+                ARouter.getInstance().build(RouterConstants.MAIN_LOGINFRAGMENT).navigation() as LoginOwner
+            loginOwner.show(it.supportFragmentManager)
         }
         initSdk()
     }

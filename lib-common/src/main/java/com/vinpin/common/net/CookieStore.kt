@@ -50,7 +50,7 @@ object CookieStore {
     fun getCookies() = ArrayList<Cookie>().apply {
         mCookieSp.all.keys.forEach {
             add(
-                Cookie.Builder().domain("")
+                Cookie.Builder().domain("www.wanandroid.com")
                     .name(it)
                     .value(mCookieSp.getString(it, "")!!)
                     .build()

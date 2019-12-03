@@ -1,10 +1,11 @@
 package com.vinpin.common
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.vinpin.commonutils.Utils
 
@@ -17,8 +18,13 @@ import com.vinpin.commonutils.Utils
  */
 object LoginInit {
 
-    var goLoginCallBack: ((activity: Activity) -> Unit)? = null
+    var goLoginCallBack: ((activity: FragmentActivity) -> Unit)? = null
 
+}
+
+interface LoginOwner {
+
+    fun show(manager: FragmentManager)
 }
 
 /**
