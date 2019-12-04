@@ -7,33 +7,28 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vinpin.common.LoginOwner
 import com.vinpin.common.RouterConstants
-import com.vinpin.common.net.KcRetrofitUtils
-import com.vinpin.common.net.tryCatchWithIo
-import com.vinpin.common.shortToast
-import com.vinpin.common.util.UserInfoUtils
+import com.vinpin.commonutils.KeyboardUtils
 import com.vinpin.commonutils.ResourcesUtils
 import com.vinpin.commonutils.SizeUtils
 import com.vinpin.selectorhelper.ShapeHelper
-import com.vinpin.selectorhelper.ShapeSelector
 import com.vinpin.wanandroid.main.R
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-
 
 /**
  * <pre>
  *     author: VinPin
  *     time  : 2019/12/3 9:26
- *     desc  : 登录Fragment
+ *     desc  : 登录BottomSheetDialogFragment
  * </pre>
  */
 @Route(path = RouterConstants.MAIN_LOGINFRAGMENT)
@@ -50,23 +45,28 @@ class LoginFragment : BottomSheetDialogFragment(), LoginOwner, CoroutineScope by
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        v_logo.background = ShapeHelper.getInstance().solidColor(R.color.login_top)
+        view?.setOnClickListener {
+            KeyboardUtils.hideSoftInput(it)
+        }
+        img_close.setOnClickListener {
+            dismiss()
+        }
+        v_top.background = ShapeHelper.getInstance().solidColor(R.color.login_top)
             .tlRadius(SizeUtils.dp2px(20f).toFloat())
             .trRadius(SizeUtils.dp2px(20f).toFloat())
             .create()
-        txt_login.background = ShapeSelector.getInstance().enabled(
-            false, ShapeHelper.getInstance()
-                .solidColor(R.color.login_button_disable)
-                .cornerRadius(SizeUtils.dp2px(20f).toFloat())
-                .create()
-        ).defaultShape(
-            ShapeHelper.getInstance()
-                .solidColor(R.color.login_button)
-                .cornerRadius(SizeUtils.dp2px(20f).toFloat())
-                .create()
-        ).create()
-        txt_login.isEnabled = false
-        initClickListener()
+
+        val fragments = listOf(
+            DengLuFragment(),
+            RegisterFragment()
+        )
+        viewPager.offscreenPageLimit = 2
+        viewPager.isUserInputEnabled = false
+        viewPager.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount(): Int = fragments.size
+
+            override fun createFragment(position: Int): Fragment = fragments[position]
+        }
     }
 
     override fun onStart() {
@@ -85,46 +85,6 @@ class LoginFragment : BottomSheetDialogFragment(), LoginOwner, CoroutineScope by
                 bottomSheetBehavior.peekHeight = it.measuredHeight
                 parent.setBackgroundColor(ResourcesUtils.getColor(R.color.transparent))
             }
-        }
-    }
-
-    private fun initClickListener() {
-        img_close.setOnClickListener {
-            dismiss()
-        }
-        txt_login.setOnClickListener {
-            val account = et_account.text.toString()
-            val password = et_password.text.toString()
-            login(account, password)
-        }
-        et_account.addTextChangedListener {
-            if (it?.toString()?.isEmpty() == true) {
-                txt_login.isEnabled = false
-            } else {
-                txt_login.isEnabled = et_password.text.toString().isNotEmpty()
-            }
-        }
-        et_password.addTextChangedListener {
-            if (it?.toString()?.isEmpty() == true) {
-                txt_login.isEnabled = false
-            } else {
-                txt_login.isEnabled = et_account.text.toString().isNotEmpty()
-            }
-        }
-    }
-
-    private fun login(account: String, password: String) {
-        launch {
-            txt_login.isEnabled = false
-            val apiResponse = tryCatchWithIo {
-                KcRetrofitUtils.getApi().login(account, password)
-            }
-            txt_login.isEnabled = true
-            apiResponse.getOrNull()?.let {
-                UserInfoUtils.saveUserInfo(it)
-                dismiss()
-            }
-            apiResponse.exceptionOrNull()?.errorMsg.shortToast(context!!)
         }
     }
 
@@ -149,6 +109,10 @@ class LoginFragment : BottomSheetDialogFragment(), LoginOwner, CoroutineScope by
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    override fun switch(position: Int) {
+        viewPager?.setCurrentItem(position, true)
     }
 
     companion object {

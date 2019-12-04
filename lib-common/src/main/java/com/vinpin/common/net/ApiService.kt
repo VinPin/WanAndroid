@@ -3,10 +3,7 @@ package com.vinpin.common.net
 import com.vinpin.common.vo.Article
 import com.vinpin.common.vo.ArticleList
 import com.vinpin.common.vo.UserInfo
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * <pre>
@@ -28,6 +25,18 @@ interface ApiService {
     suspend fun login(
         @Query("username") username: String,
         @Query("password") password: String
+    ): ApiResponse<UserInfo>
+
+
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("repassword") repassword: String
     ): ApiResponse<UserInfo>
 
     /**

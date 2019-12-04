@@ -24,7 +24,20 @@ object LoginInit {
 
 interface LoginOwner {
 
+    /**
+     * 显示LoginFragment
+     */
     fun show(manager: FragmentManager)
+
+    /**
+     * 关闭LoginFragment
+     */
+    fun dismiss()
+
+    /**
+     * 切换登录和注册Fragment
+     */
+    fun switch(position: Int)
 }
 
 /**
