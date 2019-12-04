@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
@@ -17,6 +16,7 @@ import com.vinpin.common.LoginOwner
 import com.vinpin.common.RouterConstants
 import com.vinpin.common.net.KcRetrofitUtils
 import com.vinpin.common.net.tryCatchWithIo
+import com.vinpin.common.shortToast
 import com.vinpin.common.util.UserInfoUtils
 import com.vinpin.commonutils.ResourcesUtils
 import com.vinpin.commonutils.SizeUtils
@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
  * <pre>
  *     author: VinPin
  *     time  : 2019/12/3 9:26
- *     desc  : 登陆Fragment
+ *     desc  : 登录Fragment
  * </pre>
  */
 @Route(path = RouterConstants.MAIN_LOGINFRAGMENT)
@@ -71,6 +71,7 @@ class LoginFragment : BottomSheetDialogFragment(), LoginOwner, CoroutineScope by
 
     override fun onStart() {
         super.onStart()
+        // 设置全屏
         dialog?.let {
             val bottomSheet =
                 it.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
@@ -120,12 +121,10 @@ class LoginFragment : BottomSheetDialogFragment(), LoginOwner, CoroutineScope by
             }
             txt_login.isEnabled = true
             apiResponse.getOrNull()?.let {
-                UserInfoUtils.getInstance().saveUserInfo(it)
+                UserInfoUtils.saveUserInfo(it)
                 dismiss()
             }
-            apiResponse.exceptionOrNull()?.let {
-                Toast.makeText(context, it.errorMsg, Toast.LENGTH_SHORT).show()
-            }
+            apiResponse.exceptionOrNull()?.errorMsg.shortToast(context!!)
         }
     }
 

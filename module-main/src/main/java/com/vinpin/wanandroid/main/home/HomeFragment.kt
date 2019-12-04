@@ -12,6 +12,7 @@ import com.vinpin.adapter.MultiItemTypeAdapter
 import com.vinpin.common.NotifyItem
 import com.vinpin.common.RouterConstants
 import com.vinpin.common.base.BaseFragment
+import com.vinpin.common.util.UserInfoUtils
 import com.vinpin.common.vo.Article
 import com.vinpin.wanandroid.main.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -98,7 +99,9 @@ class HomeFragment : BaseFragment() {
                 }
             })
             mAdapter?.setOnCollectClickListener { _, item, position ->
-                mViewModel.collectClicked(item, position)
+                if (UserInfoUtils.doIfLogin()) {
+                    mViewModel.collectClicked(item, position)
+                }
             }
             recycerView.setAdapter(mAdapter!!)
         } else {

@@ -9,10 +9,11 @@ package com.vinpin.common.vo
  */
 data class UserInfo(
     var admin: Boolean,
-    var chapterTops: List<String>,
-    var collectIds: List<Int>,
-    var email: String,
-    var icon: String,
-    var nickname: String,
-    var username: String
+    var chapterTops: List<String>?,
+    var collectIds: List<Int>?,
+    var id: Int,
+    var email: String?,
+    var icon: String?,
+    var nickname: String?,
+    var username: String?
 )
