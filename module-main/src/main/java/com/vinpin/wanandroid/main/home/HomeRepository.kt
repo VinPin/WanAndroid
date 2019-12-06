@@ -5,6 +5,7 @@ import com.vinpin.common.net.KcRetrofitUtils
 import com.vinpin.common.net.tryCatchWithIo
 import com.vinpin.common.vo.Article
 import com.vinpin.common.vo.ArticleList
+import com.vinpin.common.vo.BannerInfo
 
 /**
  * <pre>
@@ -27,6 +28,10 @@ class HomeRepository {
 
     suspend fun getArticleList(page: Int): ApiResponse<ArticleList> = tryCatchWithIo {
         KcRetrofitUtils.getApi().getArticleList(page)
+    }
+
+    suspend fun getBanner(): ApiResponse<List<BannerInfo>> = tryCatchWithIo {
+        KcRetrofitUtils.getApi().getBanner()
     }
 
     suspend fun collect(id: Int): ApiResponse<String> = tryCatchWithIo {

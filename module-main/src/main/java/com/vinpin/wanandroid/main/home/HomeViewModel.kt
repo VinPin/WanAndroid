@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.vinpin.common.NotifyItem
 import com.vinpin.common.net.Resource
 import com.vinpin.common.vo.Article
+import com.vinpin.common.vo.BannerInfo
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val articleList: LiveData<Resource<List<Article>>> = _articleList
 
+    private val _bannerList = MutableLiveData<Resource<List<BannerInfo>>>()
+
+    val bannerList: LiveData<Resource<List<BannerInfo>>> = _bannerList
+
     private val _notifyItem = MutableLiveData<NotifyItem>()
 
     val notifyItem: LiveData<NotifyItem> = _notifyItem
@@ -42,8 +47,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             val deferred1 = async {
                 mHomeRepository.getArticleList(page)
             }
+            val deferred2 = async {
+                mHomeRepository.getBanner()
+            }
             val topApiResponse = deferred.await()
             val apiResponse = deferred1.await()
+            val bannerApiResponse = deferred2.await()
+            // 列表数据
             mInfos.clear()
             topApiResponse.getOrNull()?.let {
                 mInfos.addAll(it)
@@ -54,6 +64,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             }
             apiResponse.exceptionOrNull()?.let {
                 _articleList.value = Resource.failure(it)
+            }
+            // banner数据
+            bannerApiResponse.getOrNull()?.let {
+                _bannerList.value = Resource.success(it)
+            }
+            bannerApiResponse.exceptionOrNull()?.let {
+                _bannerList.value = Resource.failure(it)
             }
         }
     }

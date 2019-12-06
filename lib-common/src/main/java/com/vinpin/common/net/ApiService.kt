@@ -2,6 +2,7 @@ package com.vinpin.common.net
 
 import com.vinpin.common.vo.Article
 import com.vinpin.common.vo.ArticleList
+import com.vinpin.common.vo.BannerInfo
 import com.vinpin.common.vo.UserInfo
 import retrofit2.http.*
 
@@ -51,6 +52,12 @@ interface ApiService {
      */
     @GET("article/list/{page}/json")
     suspend fun getArticleList(@Path("page") page: Int): ApiResponse<ArticleList>
+
+    /**
+     * 首页banner
+     */
+    @GET("banner/json")
+    suspend fun getBanner(): ApiResponse<List<BannerInfo>>
 
     /**
      * 收藏站内文章

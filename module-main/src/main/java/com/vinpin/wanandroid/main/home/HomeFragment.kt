@@ -1,6 +1,9 @@
 package com.vinpin.wanandroid.main.home
 
+import android.content.Context
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -14,8 +17,15 @@ import com.vinpin.common.RouterConstants
 import com.vinpin.common.base.BaseFragment
 import com.vinpin.common.util.UserInfoUtils
 import com.vinpin.common.vo.Article
+import com.vinpin.commonutils.SizeUtils
+import com.vinpin.imageloader.ImageLoader
 import com.vinpin.wanandroid.main.R
+import com.youth.banner.Banner
+import com.youth.banner.BannerConfig
+import com.youth.banner.Transformer
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
 
 /**
  * <pre>
@@ -28,6 +38,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : BaseFragment() {
 
     private var mAdapter: ArticleAdapter? = null
+
+    private var mBanner: Banner? = null
 
     private val mViewModel: HomeViewModel by lazy {
         val factory = ViewModelProvider.AndroidViewModelFactory.getInstance(mActivity.application)
@@ -46,6 +58,17 @@ class HomeFragment : BaseFragment() {
             }
             resource.exceptionOrNull()?.let {
                 recycerView.closeHeaderOrFooter()
+            }
+        })
+        mViewModel.bannerList.observe(this, Observer { resource ->
+            resource.getOrNull()?.let { list ->
+                val urls = ArrayList<String>()
+                val titles = ArrayList<String>()
+                list.forEach {
+                    urls.add(it.imagePath ?: "")
+                    titles.add(it.title ?: "")
+                }
+                mBanner?.update(urls, titles)
             }
         })
         mViewModel.notifyItem.observe(this, Observer {
@@ -70,6 +93,16 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun getLazyData() {
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mBanner?.startAutoPlay()
+    }
+
+    override fun onStop() {
+        mBanner?.stopAutoPlay()
+        super.onStop()
     }
 
     override fun onDestroyView() {
@@ -100,12 +133,40 @@ class HomeFragment : BaseFragment() {
             })
             mAdapter?.setOnCollectClickListener { _, item, position ->
                 if (UserInfoUtils.doIfLogin()) {
-                    mViewModel.collectClicked(item, position)
+                    mViewModel.collectClicked(item, position - recycerView.getHeadersCount())
                 }
             }
             recycerView.setAdapter(mAdapter!!)
+            createBannerIfAbsent()
         } else {
             mAdapter?.notifyDataSetChanged()
+        }
+    }
+
+    private fun createBannerIfAbsent() {
+        if (mBanner == null) {
+            mBanner = Banner(mContext)
+            val height: Int = (SizeUtils.getScreenPx(mContext)[0] * (9f / 16f)).toInt()
+            val params = ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
+            params.bottomMargin = SizeUtils.dp2px(10f)
+            mBanner?.layoutParams = params
+            mBanner?.setImageLoader(object : com.youth.banner.loader.ImageLoader() {
+                override fun displayImage(context: Context, url: Any, imageView: ImageView) {
+                    ImageLoader.with(context).url(url as String)
+                        .placeholder(R.drawable.image_holder)
+                        .error(R.drawable.image_holder)
+                        .into(imageView)
+                }
+            })
+            mBanner?.setIndicatorGravity(BannerConfig.CENTER)
+            mBanner?.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
+            mBanner?.setBannerAnimation(Transformer.Default)
+            mBanner?.startAutoPlay()
+            mBanner?.setDelayTime(5000)
+            mBanner?.setOnBannerListener(OnBannerListener { position ->
+                // todo clicked
+            })
+            recycerView.addHeaderView(mBanner!!)
         }
     }
 }

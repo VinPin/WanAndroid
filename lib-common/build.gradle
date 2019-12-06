@@ -40,32 +40,33 @@ dependencies {
     implementation project(':lib-res')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    api rootProject.ext.dependencies["design"]
-    api rootProject.ext.dependencies["annotation"]
-    api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["constraintlayout"]
-    api rootProject.ext.dependencies["viewpager2"]
-    api rootProject.ext.dependencies["multidex"] // dex分包
-    api rootProject.ext.dependencies["extensions"] //lifecycle
-    api rootProject.ext.dependencies["core-ktx"]
-    api rootProject.ext.dependencies["viewmodel-ktx"]
-    api rootProject.ext.dependencies["coroutines-android"]
-    api rootProject.ext.dependencies["gson"] // gson
-    api rootProject.ext.dependencies["eventbus"] // EventBus事件总线
-    api rootProject.ext.dependencies["arouter-api"] // ARouter
-    api rootProject.ext.dependencies["commonutils"] // 工具类
-    api rootProject.ext.dependencies["baseadapter"]
-    api rootProject.ext.dependencies["selectorhelper"]
-    api rootProject.ext.dependencies["imageloader"]
-    api rootProject.ext.dependencies["roundedimageview"]
-    api rootProject.ext.dependencies["realtimeblurview"]
-    api rootProject.ext.dependencies["SmartRefreshLayout"]
+    api rootProject.ext.dependencies.design
+    api rootProject.ext.dependencies.annotation
+    api rootProject.ext.dependencies.appcompat
+    api rootProject.ext.dependencies.constraintlayout
+    api rootProject.ext.dependencies.viewpager2
+    api rootProject.ext.dependencies.multidex // dex分包
+    api rootProject.ext.dependencies.extensions //lifecycle
+    api rootProject.ext.dependencies.corektx
+    api rootProject.ext.dependencies.viewmodelktx
+    api rootProject.ext.dependencies.coroutinesandroid
+    api rootProject.ext.dependencies.gson // gson
+    api rootProject.ext.dependencies.eventbus // EventBus事件总线
+    api rootProject.ext.dependencies.arouterapi // ARouter
+    api rootProject.ext.dependencies.commonutils // 工具类
+    api rootProject.ext.dependencies.baseadapter
+    api rootProject.ext.dependencies.selectorhelper
+    api rootProject.ext.dependencies.imageloader
+    api rootProject.ext.dependencies.roundedimageview
+    api rootProject.ext.dependencies.realtimeblurview
+    api rootProject.ext.dependencies.SmartRefreshLayout
+    api rootProject.ext.dependencies.banner
     // OkHttp
-    api rootProject.ext.dependencies["logging-interceptor"]
+    api rootProject.ext.dependencies.logginginterceptor
     // retrofit
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["converter-scalars"]
-    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.converterscalars
+    api rootProject.ext.dependencies.convertergson
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
