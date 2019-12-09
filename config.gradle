@@ -28,7 +28,6 @@ ext {
             selectorhelper    : 'com.vinpin:selectorhelper:2.0.0',
             imageloader       : 'com.vinpin:imageloader:2.0.0',
             roundedimageview  : 'com.makeramen:roundedimageview:2.3.0',
-            realtimeblurview  : 'com.github.mmin18:realtimeblurview:1.2.1',
             SmartRefreshLayout: 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0',
             banner            : 'com.youth.banner:banner:1.4.10',
 

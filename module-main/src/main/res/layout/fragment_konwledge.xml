@@ -7,15 +7,21 @@
     android:background="@color/activity"
     tools:context=".home.HomeFragment">
 
-    <TextView
-        android:id="@+id/viewPager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:text="体系"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.vinpin.common.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.vinpin.common.widget.RefreshRecyclerView
+        android:id="@+id/recycerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

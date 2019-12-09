@@ -58,7 +58,6 @@ dependencies {
     api rootProject.ext.dependencies.selectorhelper
     api rootProject.ext.dependencies.imageloader
     api rootProject.ext.dependencies.roundedimageview
-    api rootProject.ext.dependencies.realtimeblurview
     api rootProject.ext.dependencies.SmartRefreshLayout
     api rootProject.ext.dependencies.banner
     // OkHttp

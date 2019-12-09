@@ -1,9 +1,6 @@
 package com.vinpin.common.net
 
-import com.vinpin.common.vo.Article
-import com.vinpin.common.vo.ArticleList
-import com.vinpin.common.vo.BannerInfo
-import com.vinpin.common.vo.UserInfo
+import com.vinpin.common.vo.*
 import retrofit2.http.*
 
 /**
@@ -74,4 +71,21 @@ interface ApiService {
      */
     @POST("lg/uncollect_originId/{id}/json")
     suspend fun uncollect(@Path("id") id: Int): ApiResponse<String>
+
+    /**
+     * 体系数据
+     */
+    @GET("tree/json")
+    suspend fun getTreeList(): ApiResponse<List<TreeInfo>>
+
+    /**
+     * 知识体系下的文章
+     * 方法：GET
+     * 参数：cid 分类的id，上述二级目录的id 页码：拼接在链接上，从0开始。
+     */
+    @GET("article/list/{page}/json")
+    suspend fun getTreeArticleList(
+        @Path("page") page: Int,
+        @Query("cid") id: Int
+    ): ApiResponse<ArticleList>
 }
