@@ -38,6 +38,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     val notifyItem: LiveData<NotifyItem> = _notifyItem
 
+    override fun onCleared() {
+        super.onCleared()
+        mInfos.clear()
+    }
+
     fun getArticleList() {
         viewModelScope.launch {
             page = 0

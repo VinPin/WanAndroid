@@ -26,6 +26,11 @@ class KnowledgeViewModel(application: Application) : AndroidViewModel(applicatio
 
     val treeList: LiveData<Resource<List<TreeInfo>>> = _treeList
 
+    override fun onCleared() {
+        super.onCleared()
+        mInfos.clear()
+    }
+
     fun getTreeList() {
         viewModelScope.launch {
             val apiResponse = mKnowledgeRespository.getTreeList()

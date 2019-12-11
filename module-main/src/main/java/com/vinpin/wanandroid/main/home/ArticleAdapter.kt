@@ -28,7 +28,7 @@ class ArticleAdapter(
     datas: List<Article>
 ) : CommonAdapter<Article>(context, R.layout.item_article_list, datas) {
 
-    private var mCollectListener: ((View: View, item: Article, position: Int) -> Unit)? = null
+    private var mCollectListener: ((view: View, item: Article, position: Int) -> Unit)? = null
 
     override fun convert(holder: ViewHolder, info: Article, position: Int) {
         holder.getView<View>(R.id.rl_content).background =
@@ -114,7 +114,7 @@ class ArticleAdapter(
         }
     }
 
-    fun setOnCollectClickListener(block: (View: View, item: Article, position: Int) -> Unit) {
+    fun setOnCollectClickListener(block: (view: View, item: Article, position: Int) -> Unit) {
         mCollectListener = block
     }
 }

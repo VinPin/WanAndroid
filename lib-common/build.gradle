@@ -60,6 +60,7 @@ dependencies {
     api rootProject.ext.dependencies.roundedimageview
     api rootProject.ext.dependencies.SmartRefreshLayout
     api rootProject.ext.dependencies.banner
+    api rootProject.ext.dependencies.flexbox
     // OkHttp
     api rootProject.ext.dependencies.logginginterceptor
     // retrofit
