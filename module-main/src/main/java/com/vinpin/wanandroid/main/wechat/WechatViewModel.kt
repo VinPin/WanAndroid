@@ -1,4 +1,4 @@
-package com.vinpin.wanandroid.main.knowledge
+package com.vinpin.wanandroid.main.wechat
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 /**
  * <pre>
  *     author: VinPin
- *     time  : 2019/12/9 9:19
- *     desc  : 知识体系Fragment的ViewModel
+ *     time  : 2019/12/12 14:31
+ *     desc  : 公众号Fragment的ViewModel
  * </pre>
  */
-class KnowledgeViewModel(application: Application) : AndroidViewModel(application) {
+class WechatViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val mKnowledgeRespository: KnowledgeRespository = KnowledgeRespository()
+    private val mWechatRespository: WechatRespository = WechatRespository()
 
     private val mInfos: ArrayList<ChapterInfo> = ArrayList()
 
@@ -31,9 +31,9 @@ class KnowledgeViewModel(application: Application) : AndroidViewModel(applicatio
         mInfos.clear()
     }
 
-    fun getTreeList() {
+    fun getWxArticleChapters() {
         viewModelScope.launch {
-            val apiResponse = mKnowledgeRespository.getTreeList()
+            val apiResponse = mWechatRespository.getWxArticleChapters()
             mInfos.clear()
             apiResponse.getOrNull()?.let {
                 mInfos.addAll(it)

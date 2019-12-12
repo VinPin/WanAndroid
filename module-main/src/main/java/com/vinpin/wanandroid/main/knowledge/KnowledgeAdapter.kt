@@ -8,7 +8,7 @@ import androidx.core.view.setMargins
 import com.google.android.flexbox.FlexboxLayout
 import com.vinpin.adapter.CommonAdapter
 import com.vinpin.adapter.base.ViewHolder
-import com.vinpin.common.vo.TreeInfo
+import com.vinpin.common.vo.ChapterInfo
 import com.vinpin.commonutils.ResourcesUtils
 import com.vinpin.commonutils.SizeUtils
 import com.vinpin.selectorhelper.SelectorHelper
@@ -25,15 +25,15 @@ import java.util.*
  */
 class KnowledgeAdapter(
     val context: Context,
-    datas: List<TreeInfo>
-) : CommonAdapter<TreeInfo>(context, R.layout.item_konwnledge_list, datas) {
+    datas: List<ChapterInfo>
+) : CommonAdapter<ChapterInfo>(context, R.layout.item_konwnledge_list, datas) {
 
     private val mChildTextViewCaches: Queue<TextView> = LinkedList<TextView>()
 
-    private var mOnChildItemClickListener: ((view: View, item: TreeInfo, position: Int) -> Unit)? =
+    private var mOnChildItemClickListener: ((view: View, item: ChapterInfo, position: Int) -> Unit)? =
         null
 
-    override fun convert(holder: ViewHolder, info: TreeInfo, position: Int) {
+    override fun convert(holder: ViewHolder, info: ChapterInfo, position: Int) {
         holder.setText(R.id.txt_parent, info.name)
         val flexboxLayout = holder.getView<FlexboxLayout>(R.id.flexbox_child)
         flexboxLayout.removeAllViews()
@@ -93,7 +93,7 @@ class KnowledgeAdapter(
         }
     }
 
-    fun setOnChildItemClickListener(block: (view: View, item: TreeInfo, position: Int) -> Unit) {
+    fun setOnChildItemClickListener(block: (view: View, item: ChapterInfo, position: Int) -> Unit) {
         mOnChildItemClickListener = block
     }
 }

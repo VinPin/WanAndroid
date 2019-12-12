@@ -12,6 +12,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme" parent="AppNoActionBarTheme"/>
+    <style name="AppTheme" parent="AppNoActionBarTheme" />
+
+    <!--TabLayout 字体风格，去掉小写转大写-->
+    <style name="TabLayoutTextStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!--TabLayout 粗体字体风格，去掉小写转大写-->
+    <style name="TabLayoutTextBoldStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 
 </resources>

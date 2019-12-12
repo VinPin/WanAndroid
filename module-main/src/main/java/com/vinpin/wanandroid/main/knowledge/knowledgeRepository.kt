@@ -4,7 +4,7 @@ import com.vinpin.common.net.ApiResponse
 import com.vinpin.common.net.KcRetrofitUtils
 import com.vinpin.common.net.tryCatchWithIo
 import com.vinpin.common.vo.ArticleList
-import com.vinpin.common.vo.TreeInfo
+import com.vinpin.common.vo.ChapterInfo
 
 /**
  * <pre>
@@ -15,7 +15,7 @@ import com.vinpin.common.vo.TreeInfo
  */
 class KnowledgeRespository {
 
-    suspend fun getTreeList(): ApiResponse<List<TreeInfo>> = tryCatchWithIo {
+    suspend fun getTreeList(): ApiResponse<List<ChapterInfo>> = tryCatchWithIo {
         val apiResponse = KcRetrofitUtils.getApi().getTreeList()
         apiResponse.getOrNull()?.let { list ->
             list.forEach {

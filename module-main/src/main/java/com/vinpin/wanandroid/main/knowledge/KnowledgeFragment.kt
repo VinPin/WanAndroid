@@ -10,7 +10,7 @@ import com.vinpin.adapter.MultiItemTypeAdapter
 import com.vinpin.common.RouterConstants
 import com.vinpin.common.base.BaseFragment
 import com.vinpin.common.shortToast
-import com.vinpin.common.vo.TreeInfo
+import com.vinpin.common.vo.ChapterInfo
 import com.vinpin.wanandroid.main.R
 import kotlinx.android.synthetic.main.fragment_konwledge.*
 
@@ -40,7 +40,7 @@ class KnowledgeFragment : BaseFragment() {
         recycerView.setEnableLoadMore(false)
         recycerView.setEnableOverScrollDrag(true)
 
-        mViewModel.treeList.observe(this, Observer { resource ->
+        mViewModel.chapterList.observe(this, Observer { resource ->
             resource.getOrNull()?.let {
                 setRecyclerViewData(it)
             }
@@ -55,7 +55,7 @@ class KnowledgeFragment : BaseFragment() {
 
     }
 
-    private fun setRecyclerViewData(infos: List<TreeInfo>) {
+    private fun setRecyclerViewData(infos: List<ChapterInfo>) {
         if (mAdapter == null) {
             mAdapter = KnowledgeAdapter(mContext, infos)
             mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
@@ -86,7 +86,7 @@ class KnowledgeFragment : BaseFragment() {
         }
     }
 
-    private fun onChildItemClicked(item: TreeInfo, position: Int) {
+    private fun onChildItemClicked(item: ChapterInfo, position: Int) {
         //todo 打开页面
         "正在研发中，敬请期待".shortToast(mContext)
     }

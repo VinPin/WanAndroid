@@ -76,7 +76,7 @@ interface ApiService {
      * 体系数据
      */
     @GET("tree/json")
-    suspend fun getTreeList(): ApiResponse<List<TreeInfo>>
+    suspend fun getTreeList(): ApiResponse<List<ChapterInfo>>
 
     /**
      * 知识体系下的文章
@@ -88,4 +88,11 @@ interface ApiService {
         @Path("page") page: Int,
         @Query("cid") id: Int
     ): ApiResponse<ArticleList>
+
+    /**
+     * 获取公众号列表
+     * 方法： GET
+     */
+    @GET("wxarticle/chapters/json")
+    suspend fun getWxArticleChapters(): ApiResponse<List<ChapterInfo>>
 }
