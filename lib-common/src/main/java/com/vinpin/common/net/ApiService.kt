@@ -95,4 +95,15 @@ interface ApiService {
      */
     @GET("wxarticle/chapters/json")
     suspend fun getWxArticleChapters(): ApiResponse<List<ChapterInfo>>
+
+    /**
+     * 查看某个公众号历史数据
+     * 方法：GET
+     * 参数：公众号 ID：拼接在 url 中，eg:405 公众号页码：拼接在 url 中，eg:1
+     */
+    @GET("wxarticle/list/{id}/{page}/json")
+    suspend fun getWxArticleList(
+        @Path("id") id: Int,
+        @Path("page") page: Int
+    ): ApiResponse<ArticleList>
 }

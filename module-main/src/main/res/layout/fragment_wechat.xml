@@ -20,9 +20,18 @@
         app:tabIndicatorHeight="0dp"
         app:tabMode="scrollable"
         app:tabRippleColor="@null"
-        app:tabSelectedTextColor="@color/text_green"
+        app:tabSelectedTextColor="@color/text_blue"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabTextColor="@color/text_main" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/titleBarLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -31,6 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@id/v_line" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

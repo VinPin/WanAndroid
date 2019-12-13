@@ -56,7 +56,8 @@ class WechatFragment : BaseFragment() {
 
             override fun createFragment(position: Int): Fragment {
                 val chapterInfo = infos[position]
-                return ARouter.getInstance().build(RouterConstants.MAIN_WECHATARTICLEFRAGMENT).navigation() as BaseFragment
+                return ARouter.getInstance().build(RouterConstants.MAIN_WECHATARTICLEFRAGMENT)
+                    .withInt("chapterId", chapterInfo.id).navigation() as BaseFragment
             }
         }
         tabLayout.setupWithViewPager2(viewPager, labels)
