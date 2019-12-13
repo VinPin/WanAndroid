@@ -1,4 +1,4 @@
-package com.vinpin.wanandroid.main.wechat.article
+package com.vinpin.wanandroid.main.project.article
 
 import android.view.View
 import androidx.lifecycle.Observer
@@ -16,18 +16,17 @@ import com.vinpin.common.util.UserInfoUtils
 import com.vinpin.common.vo.Article
 import com.vinpin.wanandroid.main.R
 import com.vinpin.wanandroid.main.home.ArticleAdapter
-import com.vinpin.wanandroid.main.project.article.ProjectArticleViewModel
 import kotlinx.android.synthetic.main.fragment_wechat_article.*
 
 /**
  * <pre>
  *     author: VinPin
- *     time  : 2019/12/12 14:37
- *     desc  : 微信公众号的文章
+ *     time  : 2019/12/13 10:55
+ *     desc  : 项目的文章
  * </pre>
  */
-@Route(path = RouterConstants.MAIN_WECHATARTICLEFRAGMENT)
-class WechatArticleFragment : BaseFragment() {
+@Route(path = RouterConstants.MAIN_ProjectArticleFragment)
+class ProjectArticleFragment : BaseFragment() {
 
     private var chapterId: Int = 0
 
@@ -38,7 +37,7 @@ class WechatArticleFragment : BaseFragment() {
         ViewModelProviders.of(this, factory).get(ProjectArticleViewModel::class.java)
     }
 
-    override val layoutId: Int get() = R.layout.fragment_wechat_article
+    override val layoutId: Int get() = R.layout.fragment_project_article
 
     override fun getData() {
         chapterId = arguments?.getInt("chapterId") ?: 0

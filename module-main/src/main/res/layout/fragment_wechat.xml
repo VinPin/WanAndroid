@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity"
-    tools:context=".home.HomeFragment">
+    tools:context=".wechat.WechatFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

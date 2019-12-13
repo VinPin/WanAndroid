@@ -24,4 +24,7 @@ object RouterConstants {
     const val MAIN_LOGINFRAGMENT = "/main/LoginFragment"
 
     const val MAIN_WECHATARTICLEFRAGMENT = "/main/WechatArticleFragment"
+
+    const val MAIN_ProjectArticleFragment = "/main/ProjectArticleFragment"
+
 }

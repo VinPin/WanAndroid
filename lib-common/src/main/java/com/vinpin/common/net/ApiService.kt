@@ -106,4 +106,22 @@ interface ApiService {
         @Path("id") id: Int,
         @Path("page") page: Int
     ): ApiResponse<ArticleList>
+
+    /**
+     * 项目分类
+     * 方法： GET
+     */
+    @GET("project/tree/json")
+    suspend fun getProjectChapters(): ApiResponse<List<ChapterInfo>>
+
+    /**
+     * 项目列表数据
+     * 方法：GET
+     * 参数：cid 分类的id，上面项目分类接口 页码：拼接在链接中，从1开始。
+     */
+    @GET("project/list/{page}/json")
+    suspend fun getProjectArticleList(
+        @Path("page") page: Int,
+        @Query("cid") id: Int
+    ): ApiResponse<ArticleList>
 }
