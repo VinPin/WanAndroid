@@ -16,7 +16,6 @@ import com.vinpin.common.util.UserInfoUtils
 import com.vinpin.common.vo.Article
 import com.vinpin.wanandroid.main.R
 import com.vinpin.wanandroid.main.home.ArticleAdapter
-import com.vinpin.wanandroid.main.project.article.ProjectArticleViewModel
 import kotlinx.android.synthetic.main.fragment_wechat_article.*
 
 /**
@@ -33,9 +32,9 @@ class WechatArticleFragment : BaseFragment() {
 
     private var mAdapter: ArticleAdapter? = null
 
-    private val mViewModel: ProjectArticleViewModel by lazy {
+    private val mViewModel: WechatArticleViewModel by lazy {
         val factory = ViewModelProvider.AndroidViewModelFactory.getInstance(mActivity.application)
-        ViewModelProviders.of(this, factory).get(ProjectArticleViewModel::class.java)
+        ViewModelProviders.of(this, factory).get(WechatArticleViewModel::class.java)
     }
 
     override val layoutId: Int get() = R.layout.fragment_wechat_article
